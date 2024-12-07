@@ -7,13 +7,17 @@ use Illuminate\Http\Request;
 class MainController extends Controller
 {
 
-    public function index() {
-        echo 'im inside the app!';
+    public function index()
+    {
+
+        // load user's notes
+
+        // show home view
+        return view('home');
     }
 
-    public function newNote() {
+    public function newNote()
+    {
         echo 'im creating a new note!';
-
     }
-
 }

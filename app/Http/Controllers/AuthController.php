@@ -38,23 +38,23 @@ class AuthController extends Controller
 
         // check if user exists
         $user = User::where('username', $username)
-                ->where('deleted_at', NULL)
-                ->first();
+            ->where('deleted_at', NULL)
+            ->first();
 
-        if (!$user){
+        if (!$user) {
             return redirect()
-                    ->back()
-                    ->withInput()
-                    ->with('loginError', 'Usuário ou senha incorretos.');
+                ->back()
+                ->withInput()
+                ->with('loginError', 'Usuário ou senha incorretos.');
         }
 
         // check if password is correct
 
         if (!password_verify($password, $user->password)) {
             return redirect()
-                    ->back()
-                    ->withInput()
-                    ->with('loginError', 'Usuário ou senha incorretos.');
+                ->back()
+                ->withInput()
+                ->with('loginError', 'Usuário ou senha incorretos.');
         }
 
         // Update last login
@@ -70,7 +70,8 @@ class AuthController extends Controller
             ]
         ]);
 
-        echo 'LOGIN CONCLUÍDO COM SUCESSO!';
+        // Redirect to home
+        return redirect()->to('/');
     }
 
     public function logout()
@@ -78,6 +79,5 @@ class AuthController extends Controller
         // logout from the application
         session()->forget('user'); // remove usuário da sessão
         return redirect()->to('/login');
-
     }
 }
