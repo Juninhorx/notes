@@ -26,7 +26,12 @@ class MainController extends Controller
 
     public function newNote()
     {
-        echo 'im creating a new note!';
+        // Show new note view
+        return view('new_note');
+    }
+
+    public function newNoteSubmit(Request $request) {
+        echo 'i am creating a new note';
     }
 
     public function editNote($id)
