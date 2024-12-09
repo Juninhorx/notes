@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Note;
 use App\Models\User;
 use App\Services\Operations;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -54,8 +55,14 @@ class MainController extends Controller
         $id = session('user.id');
 
         //create new note
+        $note = new Note(); // objeto criado a partir do model Note
+        $note->user_id = $id;
+        $note->title = $request->text_title;
+        $note->text = $request->text_note;
+        $note->save();
 
         //redirect to home
+        return redirect()->route('home');
     }
 
     public function editNote($id)
