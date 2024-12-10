@@ -70,6 +70,10 @@ class MainController extends Controller
         //$id = $this->decryptId($id);
         $id = Operations::decryptId($id);
 
+        if ($id == null) {
+            return redirect()->route('home');
+        }
+
         // load note
         $note = Note::find($id);
 
@@ -103,6 +107,10 @@ class MainController extends Controller
         }
         // dcrypt note_id
         $id = Operations::decryptId($request->note_id);
+
+        if ($id == null) {
+            return redirect()->route('home');
+        }
         // load note
         $note = Note::find($id); // Note(model)::find(método stático extendido do Model)
         // update note
@@ -118,6 +126,10 @@ class MainController extends Controller
     {
         $id = Operations::decryptId($id);
 
+        if ($id == null) {
+            return redirect()->route('home');
+        }
+
         // load note
         $note = Note::find($id);
 
@@ -129,14 +141,25 @@ class MainController extends Controller
     {
         // check if id is encrypted
         $id = Operations::decryptId($id);
+
+        if ($id == null) {
+            return redirect()->route('home');
+        }
         // load note
         $note = Note::find($id);
         // 1. hard delete
         // $note->delete();
 
         // 2. soft delete
-        $note->deleted_at = date('Y-m-d H:i:s');
-        $note->save();
+        // $note->deleted_at = date('Y-m-d H:i:s');
+        // $note->save();
+
+        // 3. soft delete (property SoftDelete in model)
+        // $note->delete();
+
+        //4. hard delete (property SoftDelete in model)
+        $note->forceDelete();
+
 
         // redirect to home
         return redirect()->route('home');
