@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckIsLogged;
 use App\Http\Middleware\CheckIsNotLogged;
 use Illuminate\Support\Facades\Route;
@@ -11,7 +12,11 @@ use Illuminate\Support\Facades\Route;
 // user not logged
 Route::middleware([CheckIsNotLogged::class])->group(function() {
 
-    Route::get('/login', [AuthController::class, 'login']);
+    Route::get('/singIn', [UserController::class, 'singIn'])->name('singIn');
+    Route::post('/singInSubmit', [UserController::class, 'singInSubmit'])->name('singInSubmit');
+
+
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/loginSubmit', [AuthController::class, 'loginSubmit']);
 
 });

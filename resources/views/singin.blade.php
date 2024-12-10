@@ -15,11 +15,11 @@
                 <!-- form -->
                 <div class="row justify-content-center">
                     <div class="col-md-10 col-12">
-                        <form action="/loginSubmit" method="post" novalidate>
+                        <form action="/singInSubmit" method="post" novalidate>
                             @csrf
                             <div class="mb-3">
                                 <label for="text_username" class="form-label">Usuário</label>
-                                <input type="email" class="form-control bg-dark text-info" name="text_username" value="{{ old('text_username') }}" required>
+                                <input type="email" class="form-control bg-dark text-info" name="text_username" required>
                                 {{-- show error --}}
                                 @error('text_username')
                                     <div class="text-danger">{{ $message }}</div>
@@ -27,27 +27,26 @@
                             </div>
                             <div class="mb-3">
                                 <label for="text_password" class="form-label">Senha</label>
-                                <input type="password" class="form-control bg-dark text-info" name="text_password" value="{{ old('text_password') }}" required>
+                                <input type="password" class="form-control bg-dark text-info" name="text_password" required>
                                 {{-- show error --}}
                                 @error('text_password')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-success w-100">ENTRAR</button>
+                                <button type="submit" class="btn btn-success w-100">CRIAR CONTA</button>
                             </div>
                             <div class="mb-3">
-                                <a href="{{ route('singIn')}}" class="btn btn-secondary w-100">CADASTRE-SE</a>
+                                <a href="{{ route('login') }}" class="btn btn-secondary w-100">FAZER LOGIN </a>
                             </div>
-                        </form>
-                        {{-- Invalid login --}}
-                        @if (session('loginError'))
+                            @if (session('singInError'))
 
                             <div class="alert alert-danger text-center">
-                                {{ session('loginError')}}
+                                {{ session('singInError')}}
                             </div>
 
                         @endif
+                        </form>
                     </div>
                 </div>
 
